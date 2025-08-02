@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1" />
- <title>crd | praod</title>
+ <title>crd | Producer</title>
  <link rel="icon" type="image/png" href="assets/favicon.png" />
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
@@ -21,11 +21,11 @@
  .card-wrapper {
   padding: 4px;
   border-radius: 24px;
-  background: linear-gradient(135deg, #3a8dde, #4da0ff, #89c3ff, #b3daff, #d6ecff);
+  background: linear-gradient(135deg, #ffbc8b, #ffd3a5, #fff6e0, #ffcba4, #ffbc8b);
   background-size: 200% 200%;
   animation: borderScroll 3s ease-in-out infinite alternate;
   display: inline-block;
-  box-shadow: 0 0 14px rgba(77, 160, 255, 0.3), 0 0 20px rgba(137, 195, 255, 0.2), 0 4px 10px rgba(179, 218, 255, 0.15);
+  box-shadow: 0 0 14px rgba(255, 188, 139, 0.3), 0 0 20px rgba(255, 211, 165, 0.2), 0 4px 10px rgba(255, 203, 164, 0.15);
   transition: transform 0.2s ease;
   transform-style: preserve-3d;
   will-change: transform;
@@ -61,27 +61,19 @@
  }
 
  .name {
-  font-size: 35px;
-  font-weight: 600;
-  margin-left: 5px;
-  background: linear-gradient(135deg, #1e3c72, #2a5298, #4e6e8e, #7b9acc, #9bc1ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-
-  text-shadow:
-    0 0 1px #3de8f5,
-    0 0 1px #1bcfe8,
-    0 0 1px #13a5b9;
-}
+ font-size: 35px;
+ font-weight: 600;
+ margin-left: 5px;
+ color: #fff;
+ }
 
  .description {
-  font-size: 16px;
-  color: #aaa;
-  margin-top: 4px;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-}
+ font-size: 16px;
+ color: #ddd;
+ line-height: 1.4;
+ max-width: 100%;
+ margin-left: 5px;
+ }
 
  .presence-card {
  display: flex;
@@ -223,30 +215,29 @@ badge.bravery {
 }
 
 .badge-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border-radius: 16px;
-  background-color: #111; /* Or your preferred solid background */
-  z-index: 1;
-  overflow: hidden;
+ display: flex;
+ align-items: center;
+ margin-left: 10px;
+ padding: 5px;
+ border-radius: 16px;
+ background: #111;
+ border: 2px solid transparent;
+ background-clip: padding-box;
+ position: relative;
 }
 
 .badge-container::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -2px;
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(135deg, #3a8dde, #4da0ff, #89c3ff, #b3daff, #d6ecff);
-  background-size: 200% 200%;
-  animation: borderScroll 3s ease-in-out infinite alternate;
   z-index: -1;
   border-radius: 18px;
-  filter: blur(6px);
+  background: linear-gradient(135deg, #ffbc8b, #ffd3a5, #fff6e0, #ffcba4, #ffbc8b);
+  background-size: 200% 200%;
+  animation: borderScroll 3s ease-in-out infinite alternate;
 }
 
 .badge-container img {
@@ -343,7 +334,7 @@ badge.bravery {
  <div class="name" id="profileName">prod @skoozuh</div>
  <div class="badge-container">
  <img src="assets/crownw.png" alt="owner">
-<img src="assets/trophy.png" alt="owner">
+ <img src="assets/trophy.png" alt="owner">
  <!-- You can add more badges here -->
  </div>
 </div>
