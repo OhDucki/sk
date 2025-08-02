@@ -223,26 +223,30 @@ badge.bravery {
 }
 
 .badge-container {
- display: flex;
- align-items: center;
- margin-left: 10px;
- padding: 5px;
- border-radius: 16px;
- background: #111;
- border: 2px solid transparent;
- background-clip: padding-box;
- position: relative;
-}
-
-.badge-container {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #3a8dde, #4da0ff, #89c3ff, #b3daff, #d6ecff);
-  background-size: 200% 200%;
   padding: 6px 10px;
   border-radius: 16px;
+  background-color: #111; /* Or your preferred solid background */
+  z-index: 1;
+  overflow: hidden;
+}
+
+.badge-container::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #3a8dde, #4da0ff, #89c3ff, #b3daff, #d6ecff);
+  background-size: 200% 200%;
   animation: borderScroll 3s ease-in-out infinite alternate;
+  z-index: -1;
+  border-radius: 18px;
+  filter: blur(6px);
 }
 
 .badge-container img {
