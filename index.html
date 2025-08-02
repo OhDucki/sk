@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1" />
  <title>crd | Producer</title>
  <link rel="icon" type="image/png" href="assets/favicon.png" />
- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
  <style>
  body {
@@ -139,7 +139,6 @@
    color: #fff;
  }
 
- /* New tooltip wrapper styles */
  .badge-container {
    display: flex;
    align-items: center;
@@ -150,6 +149,7 @@
    border: 2px solid transparent;
    background-clip: padding-box;
    position: relative;
+   gap: 6px; /* tighter spacing */
  }
 
  .badge-container::before {
@@ -161,7 +161,8 @@
    bottom: -2px;
    z-index: -1;
    border-radius: 18px;
-   background: linear-gradient(135deg, #2f2f2f, #555555, #2f2f2f);
+   /* Black/gray gradient border */
+   background: linear-gradient(135deg, #2c2c2c, #555555);
    background-size: 200% 200%;
    animation: borderScroll 3s ease-in-out infinite alternate;
  }
@@ -169,19 +170,19 @@
  .tooltip-wrapper {
    position: relative;
    display: inline-flex;
-   cursor: default;
-   margin-right: 10px;
+   cursor: pointer;
    width: 28px;
    height: 28px;
    justify-content: center;
    align-items: center;
-   padding: 4px;
-   box-sizing: content-box;
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
  }
 
  .tooltip-wrapper img {
-   width: 20px;
-   height: 20px;
+   width: 100%;
+   height: 100%;
    border-radius: 2px;
    object-fit: cover;
    transition: transform 0.2s ease;
@@ -390,15 +391,15 @@
        <div class="badge-container">
          <div class="tooltip-wrapper">
            <img src="assets/crownw.png" alt="owner" />
-           <div class="tooltip">Owner</div>
+           <span class="tooltip">Owner</span>
          </div>
          <div class="tooltip-wrapper">
            <img src="assets/trophy.png" alt="trophy" />
-           <div class="tooltip">Trophy</div>
+           <span class="tooltip">Trophy</span>
          </div>
          <div class="tooltip-wrapper">
            <img src="assets/spider.png" alt="spider" />
-           <div class="tooltip">Spider</div>
+           <span class="tooltip">Spider</span>
          </div>
        </div>
      </div>
