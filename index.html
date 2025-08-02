@@ -139,83 +139,24 @@
    color: #fff;
  }
 
- /* Badge container with black/gray gradient border */
- .badge-container {
-   display: flex;
-   align-items: center;
-   margin-left: 10px;
-   padding: 5px;
-   border-radius: 16px;
-   background: #111;
-   border: 2px solid transparent;
-   background-clip: padding-box;
-   position: relative;
-   gap: 6px; /* closer badges */
- }
-
- .badge-container::before {
-   content: '';
-   position: absolute;
-   top: -2px;
-   left: -2px;
-   right: -2px;
-   bottom: -2px;
-   z-index: -1;
-   border-radius: 18px;
-   background: linear-gradient(135deg, #2c2c2c, #555555);
-   background-size: 200% 200%;
-   animation: borderScroll 3s ease-in-out infinite alternate;
- }
-
- /* Tooltip wrapper fixes */
- .tooltip-wrapper {
-   position: relative;
+ .badge {
    display: inline-block;
-   width: 28px;
-   height: 28px;
-   cursor: pointer;
-   padding: 0;
-   margin: 0;
-   box-sizing: border-box;
-   pointer-events: auto;
-   background: transparent;
+   width: 16px;
+   height: 16px;
+   border-radius: 0px;
+   background-size: cover;
+   background-position: center;
+   vertical-align: middle;
  }
 
- .tooltip-wrapper img {
-   width: 28px;
-   height: 28px;
-   border-radius: 2px;
-   object-fit: cover;
-   display: block;
-   pointer-events: none; /* pass hover to wrapper */
-   transition: transform 0.2s ease;
+ .badge.quest {
+   background-image: url('assets/quest.png');
+   margin-left: 5px;
  }
 
- .tooltip-wrapper:hover img {
-   transform: scale(1.15);
- }
-
- .tooltip-wrapper .tooltip {
-   position: absolute;
-   bottom: 100%;
-   left: 50%;
-   transform: translateX(-50%) translateY(-8px);
-   padding: 5px 8px;
-   border-radius: 6px;
-   background-color: rgba(20, 20, 20, 0.9);
-   color: #fff;
-   font-size: 12px;
-   white-space: nowrap;
-   opacity: 0;
-   pointer-events: none;
-   transition: opacity 0.25s ease, transform 0.25s ease;
-   z-index: 10000;
- }
-
- .tooltip-wrapper:hover .tooltip {
-   opacity: 1;
-   pointer-events: auto;
-   transform: translateX(-50%) translateY(-12px);
+ .badge.bravery {
+   background-image: url('assets/bravery.png');
+   margin-left: 1px;
  }
 
  .music-player {
@@ -310,6 +251,41 @@
    height: 8px;
  }
 
+ .badge-container {
+   display: flex;
+   align-items: center;
+   margin-left: 10px;
+   padding: 5px;
+   border-radius: 16px;
+   background: #111;
+   border: 2px solid transparent;
+   background-clip: padding-box;
+   position: relative;
+ }
+
+ .badge-container::before {
+   content: '';
+   position: absolute;
+   top: -2px;
+   left: -2px;
+   right: -2px;
+   bottom: -2px;
+   z-index: -1;
+   border-radius: 18px;
+   background: linear-gradient(135deg, #3a8dde, #65c7f7, #0052d4);
+   background-size: 200% 200%;
+   animation: borderScroll 3s ease-in-out infinite alternate;
+ }
+
+ .badge-container img {
+   width: 15px;
+   height: 15px;
+   border-radius: 2px;
+   margin-right: 4px;
+   margin-left: 1px;
+   object-fit: cover;
+ }
+
  .social-logos {
    display: flex;
    justify-content: center;
@@ -392,14 +368,9 @@
          <span class="prod-gradient">prod</span> @skoozuh
        </div>
        <div class="badge-container">
-         <div class="tooltip-wrapper">
-           <img src="assets/trophy.png" alt="trophy" />
-           <span class="tooltip">Trophy</span>
-         </div>
-         <div class="tooltip-wrapper">
-           <img src="assets/spider.png" alt="spider" />
-           <span class="tooltip">Spider</span>
-         </div>
+         <img src="assets/crownw.png" alt="owner" />
+         <img src="assets/trophy.png" alt="owner" />
+         <img src="assets/spider.png" alt="owner" />
        </div>
      </div>
 
