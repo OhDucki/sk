@@ -296,14 +296,16 @@
       object-fit: cover;
     }
 
-    .social-logos {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      margin-top: 25px;
-      opacity: 0.2;
-    }
+    .social-logos a img.social-icon {
+  width: 35px;     /* Keep original width */
+  height: 35px;    /* Keep original height */
+  filter: grayscale(100%) brightness(1.2);
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  transition: filter 0.3s ease;
+}
 
     /* Instagram icon styling with flowing pulsing gradient background */
     .social-logos a {
