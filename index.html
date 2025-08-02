@@ -139,7 +139,6 @@
    color: #fff;
  }
 
- /* Tooltip CSS & badge styles */
  .badge-container {
    display: flex;
    align-items: center;
@@ -166,19 +165,23 @@
    animation: borderScroll 3s ease-in-out infinite alternate;
  }
 
+ /* Tooltip styles */
  .tooltip-wrapper {
    position: relative;
-   display: inline-block;
+   display: inline-flex;
    cursor: default;
-   margin-right: 4px;
+   margin-right: 8px;
+   width: 24px;
+   height: 24px;
+   justify-content: center;
+   align-items: center;
  }
 
  .tooltip-wrapper img {
-   width: 15px;
-   height: 15px;
+   width: 16px;
+   height: 16px;
    border-radius: 2px;
    object-fit: cover;
-   display: block;
    transition: transform 0.2s ease;
  }
 
@@ -186,29 +189,27 @@
    transform: scale(1.15);
  }
 
- .tooltip-text {
-   visibility: hidden;
-   opacity: 0;
-   width: max-content;
-   background-color: rgba(0,0,0,0.85);
-   color: #fff;
-   text-align: center;
-   padding: 4px 8px;
-   border-radius: 6px;
-   font-size: 12px;
+ .tooltip-wrapper .tooltip {
    position: absolute;
-   bottom: 130%;
+   bottom: 100%;
    left: 50%;
-   transform: translateX(-50%);
-   transition: opacity 0.25s ease, visibility 0.25s ease;
-   pointer-events: none;
+   transform: translateX(-50%) translateY(-8px);
+   padding: 5px 8px;
+   border-radius: 6px;
+   background-color: rgba(20, 20, 20, 0.9);
+   color: #fff;
+   font-size: 12px;
    white-space: nowrap;
-   z-index: 10;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.25s ease, transform 0.25s ease;
+   z-index: 10000;
  }
 
- .tooltip-wrapper:hover .tooltip-text {
-   visibility: visible;
+ .tooltip-wrapper:hover .tooltip {
    opacity: 1;
+   pointer-events: auto;
+   transform: translateX(-50%) translateY(-12px);
  }
 
  .music-player {
@@ -387,15 +388,15 @@
        <div class="badge-container">
          <div class="tooltip-wrapper">
            <img src="assets/crownw.png" alt="owner" />
-           <span class="tooltip-text">Owner</span>
+           <div class="tooltip">Owner</div>
          </div>
          <div class="tooltip-wrapper">
            <img src="assets/trophy.png" alt="trophy" />
-           <span class="tooltip-text">Trophy</span>
+           <div class="tooltip">Trophy</div>
          </div>
          <div class="tooltip-wrapper">
            <img src="assets/spider.png" alt="spider" />
-           <span class="tooltip-text">Spider</span>
+           <div class="tooltip">Spider</div>
          </div>
        </div>
      </div>
