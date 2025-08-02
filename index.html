@@ -115,7 +115,6 @@
       border-right: 2px solid #aaa;
       animation: blinkCursor 0.8s step-end infinite;
       height: 22px;
-      /* Added height to prevent vertical jump */
     }
 
     @keyframes blinkCursor {
@@ -306,19 +305,45 @@
       opacity: 0.2;
     }
 
-    .social-icon {
-      width: 35px;
-      height: 35px;
-      object-fit: contain;
-    }
-
+    /* Instagram icon styling with flowing pulsing gradient background */
     .social-logos a {
       display: inline-block;
-      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
     }
 
-    .social-logos a:hover {
-      transform: scale(1.15);
+    .social-logos a img.social-icon {
+      filter: grayscale(100%) brightness(1.2);
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+      border-radius: 4px;
+      transition: filter 0.3s ease;
+    }
+
+    .social-logos a::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      background: linear-gradient(270deg, #fff, #aaa, #fff);
+      background-size: 600% 100%;
+      animation: flowPulse 6s ease-in-out infinite;
+      border-radius: 6px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    @keyframes flowPulse {
+      0%, 100% {
+        background-position: 0% 50%;
+        filter: brightness(1);
+      }
+      50% {
+        background-position: 100% 50%;
+        filter: brightness(1.15);
+      }
     }
 
     @media (max-width: 480px) {
@@ -558,12 +583,10 @@
         phraseIndex = (phraseIndex + 1) % phrases.length;
       }
     }
-    setTimeout(typeEffect, typing ? 70 : 40);
+    setTimeout(typeEffect, typing ? 120 : 60);
   }
 
-  window.addEventListener('load', () => {
-    typeEffect();
-  });
+  typeEffect();
 </script>
 
 </body>
