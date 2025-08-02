@@ -139,6 +139,7 @@
    color: #fff;
  }
 
+ /* Badge container with black/gray gradient border */
  .badge-container {
    display: flex;
    align-items: center;
@@ -149,7 +150,7 @@
    border: 2px solid transparent;
    background-clip: padding-box;
    position: relative;
-   gap: 6px; /* tighter spacing */
+   gap: 6px; /* closer badges */
  }
 
  .badge-container::before {
@@ -161,30 +162,32 @@
    bottom: -2px;
    z-index: -1;
    border-radius: 18px;
-   /* Black/gray gradient border */
    background: linear-gradient(135deg, #2c2c2c, #555555);
    background-size: 200% 200%;
    animation: borderScroll 3s ease-in-out infinite alternate;
  }
 
+ /* Tooltip wrapper fixes */
  .tooltip-wrapper {
    position: relative;
-   display: inline-flex;
-   cursor: pointer;
+   display: inline-block;
    width: 28px;
    height: 28px;
-   justify-content: center;
-   align-items: center;
+   cursor: pointer;
    padding: 0;
    margin: 0;
    box-sizing: border-box;
+   pointer-events: auto;
+   background: transparent;
  }
 
  .tooltip-wrapper img {
-   width: 100%;
-   height: 100%;
+   width: 28px;
+   height: 28px;
    border-radius: 2px;
    object-fit: cover;
+   display: block;
+   pointer-events: none; /* pass hover to wrapper */
    transition: transform 0.2s ease;
  }
 
