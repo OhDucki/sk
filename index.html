@@ -70,6 +70,13 @@
  color: #fff;
  }
 
+ .prod-gradient {
+  background: linear-gradient(135deg, #a66bff, #d36fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 4px rgba(173, 119, 255, 0.4);
+}
+
  .description {
  font-size: 16px;
  color: #ddd;
@@ -184,7 +191,7 @@
  -webkit-appearance: none;
  width: 100%;
  height: 4px;
- background: rgba(255, 255, 255, 0.165); /* darker gray background */
+ background: rgba(255, 255, 255, 0.165);
  border-radius: 10px;
  position: relative;
  cursor: pointer;
@@ -192,7 +199,6 @@
  transition: height 0.2s ease;
 }
 
- /* Remove the default thumb */
  #seekBar::-webkit-slider-thumb {
  -webkit-appearance: none;
  appearance: none;
@@ -206,7 +212,7 @@
  content: '';
  position: absolute;
  height: 100%;
- background: rgba(255, 255, 255, 0.267); /* slightly lighter gray than background */
+ background: rgba(255, 255, 255, 0.267);
  width: 0%;
  z-index: 1;
  transition: width 0.1s linear;
@@ -279,7 +285,7 @@
 
 @media (max-width: 480px) {
   .card {
-    width: 90vw; /* use 90% of the viewport width */
+    width: 90vw;
     padding: 20px;
   }
 
@@ -319,7 +325,6 @@
     font-size: 12px;
   }
 }
-
  </style>
 </head>
 
@@ -327,20 +332,17 @@
 
  <div class="card-wrapper" id="cardWrapper">
  <div class="card" id="card">
- <img 
- src="assets/pfp.png" 
- alt="pfp" 
- class="profile-pic" 
- id="profilePic"
- />
+ <img src="assets/pfp.png" alt="pfp" class="profile-pic" id="profilePic" />
  <div style="display: flex; align-items: center;">
- <div class="name" id="profileName">prod @skoozuh</div>
- <div class="badge-container">
- <img src="assets/crownw.png" alt="owner">
- <img src="assets/trophy.png" alt="owner">
- <!-- You can add more badges here -->
+   <div class="name" id="profileName">
+     <span class="prod-gradient">prod</span> @skoozuh
+   </div>
+   <div class="badge-container">
+     <img src="assets/crownw.png" alt="owner">
+     <img src="assets/trophy.png" alt="owner">
+   </div>
  </div>
-</div>
+
  <div class="description" id="profileDescription">
  Owner <br> @skoozuh
  </div>
@@ -381,31 +383,29 @@
     </a>
   </div>
  </div>
-  </div>
-  
+</div>
 
- <script>
+<script>
  const wrapper = document.getElementById('cardWrapper');
 
  wrapper.addEventListener('mousemove', (e) => {
- const rect = wrapper.getBoundingClientRect();
- const x = e.clientX - rect.left;
- const y = e.clientY - rect.top;
+   const rect = wrapper.getBoundingClientRect();
+   const x = e.clientX - rect.left;
+   const y = e.clientY - rect.top;
 
- const centerX = rect.width / 2;
- const centerY = rect.height / 2;
+   const centerX = rect.width / 2;
+   const centerY = rect.height / 2;
 
- const rotateX = ((y - centerY) / centerY) * 8;
- const rotateY = ((x - centerX) / centerX) * 8;
+   const rotateX = ((y - centerY) / centerY) * 8;
+   const rotateY = ((x - centerX) / centerX) * 8;
 
- wrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+   wrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
  });
 
  wrapper.addEventListener('mouseleave', () => {
- wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
+   wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
  });
 
- // Helper function to format seconds into mm:ss
  function formatTime(seconds) {
    const mins = Math.floor(seconds / 60);
    const secs = Math.floor(seconds % 60);
@@ -426,17 +426,13 @@
    url: "assets/lucki.mp3"
  };
 
- // Set initial text
  trackTitle.textContent = song.title;
  trackArtist.textContent = song.artist;
-
- // Load audio
  audio.src = song.url;
  audio.load();
 
  let isPlaying = false;
 
- // Play/pause logic
  playPauseBtn.addEventListener('click', () => {
    playPauseIcon.style.opacity = 0;
 
@@ -454,12 +450,10 @@
    }, 200);
  });
 
- // Update duration display when metadata is loaded
  audio.addEventListener('loadedmetadata', () => {
    trackDuration.textContent = formatTime(audio.duration);
  });
 
- // Update seek bar and duration display as song plays
  audio.addEventListener('timeupdate', () => {
    if (!isNaN(audio.duration)) {
      seekBar.max = audio.duration;
@@ -468,16 +462,14 @@
      const fillPercent = (audio.currentTime / audio.duration) * 100;
      seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
 
-     // Show current time / total duration
      trackDuration.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
    }
  });
 
- // Seek logic
  seekBar.addEventListener('input', () => {
    audio.currentTime = seekBar.value;
  });
- </script>
+</script>
 
 </body>
 </html>
