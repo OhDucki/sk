@@ -61,19 +61,33 @@
  }
 
  .name {
- font-size: 35px;
- font-weight: 600;
- margin-left: 5px;
- color: #fff;
- }
+  font-size: 35px;
+  font-weight: 600;
+  margin-left: 5px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #4e6e8e, #7b9acc, #9bc1ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 0 2px #3de8f5,
+    0 0 4px #1bcfe8,
+    0 0 6px #13a5b9;
+}
 
  .description {
- font-size: 16px;
- color: #ddd;
- line-height: 1.4;
- max-width: 100%;
- margin-left: 5px;
- }
+  font-size: 32px;
+  color: transparent; /* hide default color */
+  line-height: 1.4;
+  max-width: 100%;
+  margin-left: 5px;
+
+  background: linear-gradient(135deg, #FFD700, #FFEA70, #FFB800, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
  .presence-card {
  display: flex;
@@ -334,6 +348,7 @@ badge.bravery {
  <div class="name" id="profileName">prod @skoozuh</div>
  <div class="badge-container">
  <img src="assets/crownw.png" alt="owner">
+<img src="assets/trophy.png" alt="owner">
  <!-- You can add more badges here -->
  </div>
 </div>
