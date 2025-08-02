@@ -184,14 +184,15 @@
  -webkit-appearance: none;
  width: 100%;
  height: 4px;
- background: rgba(255, 255, 255, 0.165);
+ background: rgba(255, 255, 255, 0.165); /* darker gray background */
  border-radius: 10px;
  position: relative;
  cursor: pointer;
  overflow: hidden;
  transition: height 0.2s ease;
- }
+}
 
+ /* Remove the default thumb */
  #seekBar::-webkit-slider-thumb {
  -webkit-appearance: none;
  appearance: none;
@@ -199,22 +200,22 @@
  height: 0;
  background: transparent;
  border: none;
- }
+}
 
  #seekBar::before {
  content: '';
  position: absolute;
  height: 100%;
- background: rgba(255, 255, 255, 0.267);
+ background: rgba(255, 255, 255, 0.267); /* slightly lighter gray than background */
  width: 0%;
  z-index: 1;
  transition: width 0.1s linear;
- }
+}
 
  #seekBar:hover,
  #seekBar:active {
  height: 8px;
- }
+}
 
  .badge-container {
  display: flex;
@@ -226,7 +227,7 @@
  border: 2px solid transparent;
  background-clip: padding-box;
  position: relative;
- }
+}
 
  .badge-container::before {
   content: '';
@@ -240,7 +241,7 @@
   background: linear-gradient(135deg, #3a8dde, #65c7f7, #0052d4);
   background-size: 200% 200%;
   animation: borderScroll 3s ease-in-out infinite alternate;
- }
+}
 
  .badge-container img {
  width: 15px;
@@ -249,7 +250,7 @@
  margin-right: 4px;
  margin-left: 1px;
  object-fit: cover;
- }
+}
 
 .social-logos {
   display: flex;
@@ -259,26 +260,26 @@
   margin-top: 25px;
   margin-left: 5px;
   opacity: 0.2;
- }
+}
 
- .social-icon {
+.social-icon {
   width: 35px;
   height: 35px;
   object-fit: contain;
- }
+}
 
- .social-logos a {
+.social-logos a {
   display: inline-block;
   transition: transform 0.3s ease;
- }
+}
 
- .social-logos a:hover {
+.social-logos a:hover {
   transform: scale(1.15);
- }
+}
 
- @media (max-width: 480px) {
+@media (max-width: 480px) {
   .card {
-    width: 90vw;
+    width: 90vw; /* use 90% of the viewport width */
     padding: 20px;
   }
 
@@ -317,42 +318,12 @@
   .artist-name {
     font-size: 12px;
   }
- }
+}
 
- /* New overlay styles */
- #blurOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  backdrop-filter: blur(8px);
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  cursor: pointer;
-  transition: opacity 0.5s ease;
- }
-
- #clickText {
-  color: white;
-  font-family: 'Arrays', sans-serif;
-  font-weight: 600;
-  font-size: 48px;
-  user-select: none;
-  text-transform: lowercase;
- }
  </style>
 </head>
 
 <body>
-
-<!-- Blurry overlay with "click" -->
-<div id="blurOverlay">
-  <div id="clickText">click</div>
-</div>
 
  <div class="card-wrapper" id="cardWrapper">
  <div class="card" id="card">
@@ -388,7 +359,10 @@
  <div class="music-player">
     <div class="controls">
       <div class="track-info">
-        <span id="track-title">Switchlanes</span><br>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span id="track-title">Switchlanes By - LUCKI</span>
+          <span id="track-duration" style="font-size: 13px; color: rgba(255, 255, 255, 0.5);">0:00</span>
+        </div>
         <span id="track-artist" class="artist-name">LUCKI</span>
       </div>
       <button id="playPauseBtn">
@@ -396,10 +370,6 @@
       </button>
     </div>
     <input type="range" id="seekBar" value="0" min="0" step="1">
-    <div style="display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px;">
-      <span id="currentTime">0:00</span>
-      <span id="totalDuration">0:00</span>
-    </div>
     <audio id="audio" src="assets/lucki.mp3"></audio>
   </div>
   <div class="social-logos">
@@ -410,7 +380,7 @@
       <img src="assets/lastfmlogo.png" alt="Last.fm" class="social-icon" />
     </a>
   </div>
-</div>
+ </div>
   </div>
   
 
@@ -434,89 +404,80 @@
  wrapper.addEventListener('mouseleave', () => {
  wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
  });
+
+ // Helper function to format seconds into mm:ss
+ function formatTime(seconds) {
+   const mins = Math.floor(seconds / 60);
+   const secs = Math.floor(seconds % 60);
+   return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+ }
+
+ const audio = document.getElementById('audio');
+ const playPauseBtn = document.getElementById('playPauseBtn');
+ const playPauseIcon = document.getElementById('playPauseIcon');
+ const trackTitle = document.getElementById('track-title');
+ const trackArtist = document.getElementById('track-artist');
+ const seekBar = document.getElementById('seekBar');
+ const trackDuration = document.getElementById('track-duration');
+
+ const song = {
+   title: "Switchlanes By - LUCKI",
+   artist: "LUCKI",
+   url: "assets/lucki.mp3"
+ };
+
+ // Set initial text
+ trackTitle.textContent = song.title;
+ trackArtist.textContent = song.artist;
+
+ // Load audio
+ audio.src = song.url;
+ audio.load();
+
+ let isPlaying = false;
+
+ // Play/pause logic
+ playPauseBtn.addEventListener('click', () => {
+   playPauseIcon.style.opacity = 0;
+
+   setTimeout(() => {
+     if (isPlaying) {
+       audio.pause();
+       playPauseIcon.src = "assets/play.png";
+     } else {
+       audio.play().catch(err => console.error("Playback failed:", err));
+       playPauseIcon.src = "assets/pause.png";
+     }
+
+     isPlaying = !isPlaying;
+     playPauseIcon.style.opacity = 1;
+   }, 200);
+ });
+
+ // Update duration display when metadata is loaded
+ audio.addEventListener('loadedmetadata', () => {
+   trackDuration.textContent = formatTime(audio.duration);
+ });
+
+ // Update seek bar and duration display as song plays
+ audio.addEventListener('timeupdate', () => {
+   if (!isNaN(audio.duration)) {
+     seekBar.max = audio.duration;
+     seekBar.value = audio.currentTime;
+
+     const fillPercent = (audio.currentTime / audio.duration) * 100;
+     seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
+
+     // Show current time / total duration
+     trackDuration.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+   }
+ });
+
+ // Seek logic
+ seekBar.addEventListener('input', () => {
+   audio.currentTime = seekBar.value;
+ });
  </script>
-
-<script>
-const audio = document.getElementById('audio');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const playPauseIcon = document.getElementById('playPauseIcon');
-const trackTitle = document.getElementById('track-title');
-const trackArtist = document.getElementById('track-artist');
-const seekBar = document.getElementById('seekBar');
-const currentTimeEl = document.getElementById('currentTime');
-const totalDurationEl = document.getElementById('totalDuration');
-
-const song = {
-  title: "Switchlanes",
-  artist: "LUCKI",
-  url: "assets/lucki.mp3"
-};
-
-// Set initial text
-trackTitle.textContent = song.title;
-trackArtist.textContent = song.artist;
-
-// Load audio
-audio.src = song.url;
-audio.load();
-
-let isPlaying = false;
-
-// Play/pause logic
-playPauseBtn.addEventListener('click', () => {
-  playPauseIcon.style.opacity = 0;
-
-  setTimeout(() => {
-    if (isPlaying) {
-      audio.pause();
-      playPauseIcon.src = "assets/play.png";
-    } else {
-      audio.play().catch(err => console.error("Playback failed:", err));
-      playPauseIcon.src = "assets/pause.png";
-    }
-
-    isPlaying = !isPlaying;
-    playPauseIcon.style.opacity = 1;
-  }, 200);
-});
-
-// Update seek bar and times as song plays
-audio.addEventListener('timeupdate', () => {
-  if (!isNaN(audio.duration)) {
-    seekBar.max = audio.duration;
-    seekBar.value = audio.currentTime;
-
-    // Format current time
-    const curMinutes = Math.floor(audio.currentTime / 60);
-    const curSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
-    currentTimeEl.textContent = `${curMinutes}:${curSeconds}`;
-
-    // Format total duration
-    const durMinutes = Math.floor(audio.duration / 60);
-    const durSeconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
-    totalDurationEl.textContent = `${durMinutes}:${durSeconds}`;
-
-    const fillPercent = (audio.currentTime / audio.duration) * 100;
-    seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
-  }
-});
-
-// Seek logic
-seekBar.addEventListener('input', () => {
-  audio.currentTime = seekBar.value;
-});
-</script>
-
-<script>
-const blurOverlay = document.getElementById('blurOverlay');
-
-blurOverlay.addEventListener('click', () => {
-  blurOverlay.style.opacity = '0';
-  setTimeout(() => {
-    blurOverlay.style.display = 'none';
-  }, 500);
-});
-</script>
 
 </body>
 </html>
