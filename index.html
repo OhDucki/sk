@@ -139,50 +139,76 @@
    color: #fff;
  }
 
- .badge {
-   display: inline-block;
-   width: 16px;
-   height: 16px;
-   border-radius: 0px;
-   background-size: cover;
-   background-position: center;
-   vertical-align: middle;
+ /* Tooltip CSS & badge styles */
+ .badge-container {
+   display: flex;
+   align-items: center;
+   margin-left: 10px;
+   padding: 5px;
+   border-radius: 16px;
+   background: #111;
+   border: 2px solid transparent;
+   background-clip: padding-box;
+   position: relative;
  }
 
- /* Tooltip badges */
- .badge-container img {
+ .badge-container::before {
+   content: '';
+   position: absolute;
+   top: -2px;
+   left: -2px;
+   right: -2px;
+   bottom: -2px;
+   z-index: -1;
+   border-radius: 18px;
+   background: linear-gradient(135deg, #3a8dde, #65c7f7, #0052d4);
+   background-size: 200% 200%;
+   animation: borderScroll 3s ease-in-out infinite alternate;
+ }
+
+ .tooltip-wrapper {
+   position: relative;
+   display: inline-block;
+   cursor: default;
+   margin-right: 4px;
+ }
+
+ .tooltip-wrapper img {
    width: 15px;
    height: 15px;
    border-radius: 2px;
-   margin-right: 4px;
-   margin-left: 1px;
    object-fit: cover;
-   position: relative;
-   cursor: default;
+   display: block;
    transition: transform 0.2s ease;
  }
 
- .badge-container img::after {
-   content: attr(data-tooltip);
+ .tooltip-wrapper:hover img {
+   transform: scale(1.15);
+ }
+
+ .tooltip-text {
+   visibility: hidden;
+   opacity: 0;
+   width: max-content;
+   background-color: rgba(0,0,0,0.85);
+   color: #fff;
+   text-align: center;
+   padding: 4px 8px;
+   border-radius: 6px;
+   font-size: 12px;
    position: absolute;
    bottom: 130%;
    left: 50%;
-   transform: translateX(-50%) scale(0.8);
-   background: rgba(0, 0, 0, 0.85);
-   color: #fff;
-   padding: 4px 8px;
-   border-radius: 6px;
-   white-space: nowrap;
-   font-size: 12px;
-   opacity: 0;
+   transform: translateX(-50%);
+   transition: opacity 0.25s ease, visibility 0.25s ease;
    pointer-events: none;
-   transition: opacity 0.25s ease, transform 0.25s ease;
+   white-space: nowrap;
    z-index: 10;
  }
 
- .badge-container img:hover::after {
+ .tooltip-wrapper:hover .tooltip-text {
+   visibility: visible;
    opacity: 1;
-   transform: translateX(-50%) scale(1);
  }
 
  .music-player {
@@ -277,41 +303,6 @@
    height: 8px;
  }
 
- .badge-container {
-   display: flex;
-   align-items: center;
-   margin-left: 10px;
-   padding: 5px;
-   border-radius: 16px;
-   background: #111;
-   border: 2px solid transparent;
-   background-clip: padding-box;
-   position: relative;
- }
-
- .badge-container::before {
-   content: '';
-   position: absolute;
-   top: -2px;
-   left: -2px;
-   right: -2px;
-   bottom: -2px;
-   z-index: -1;
-   border-radius: 18px;
-   background: linear-gradient(135deg, #3a8dde, #65c7f7, #0052d4);
-   background-size: 200% 200%;
-   animation: borderScroll 3s ease-in-out infinite alternate;
- }
-
- .badge-container img {
-   width: 15px;
-   height: 15px;
-   border-radius: 2px;
-   margin-right: 4px;
-   margin-left: 1px;
-   object-fit: cover;
- }
-
  .social-logos {
    display: flex;
    justify-content: center;
@@ -394,9 +385,18 @@
          <span class="prod-gradient">prod</span> @skoozuh
        </div>
        <div class="badge-container">
-         <img src="assets/crownw.png" alt="owner" data-tooltip="Owner" />
-         <img src="assets/trophy.png" alt="trophy" data-tooltip="Trophy" />
-         <img src="assets/spider.png" alt="spider" data-tooltip="Spider" />
+         <div class="tooltip-wrapper">
+           <img src="assets/crownw.png" alt="owner" />
+           <span class="tooltip-text">Owner</span>
+         </div>
+         <div class="tooltip-wrapper">
+           <img src="assets/trophy.png" alt="trophy" />
+           <span class="tooltip-text">Trophy</span>
+         </div>
+         <div class="tooltip-wrapper">
+           <img src="assets/spider.png" alt="spider" />
+           <span class="tooltip-text">Spider</span>
+         </div>
        </div>
      </div>
 
