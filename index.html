@@ -1,3 +1,6 @@
+Sure! Here's your entire updated `index.html` with the Instagram icon using a **pulsing flowing Instagram-gradient effect directly on the icon image itself** (assuming you have a white Instagram icon SVG or PNG to make this effect visible). The background behind the icon is removed.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -296,55 +299,44 @@
       object-fit: cover;
     }
 
-    .social-logos a img.social-icon {
-  width: 35px;     /* Keep original width */
-  height: 35px;    /* Keep original height */
-  filter: grayscale(100%) brightness(1.2);
-  border-radius: 4px;
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-  transition: filter 0.3s ease;
-}
-
-    /* Instagram icon styling with flowing pulsing gradient background */
-    .social-logos a {
-      display: inline-block;
-      position: relative;
-      overflow: hidden;
-      border-radius: 6px;
+    .social-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 25px;
+      opacity: 0.2;
     }
 
+    /* Pulsing Instagram gradient on the icon itself, no background */
     .social-logos a img.social-icon {
-      filter: grayscale(100%) brightness(1.2);
+      width: 35px;
+      height: 35px;
+      border-radius: 4px;
       display: inline-block;
       position: relative;
       z-index: 1;
-      border-radius: 4px;
-      transition: filter 0.3s ease;
-    }
 
-    .social-logos a::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 0;
-      background: linear-gradient(270deg, #fff, #aaa, #fff);
+      /* Make icon white for gradient mask */
+      filter: brightness(1) saturate(0);
+
+      /* Gradient background clipped to text */
+      background: linear-gradient(270deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
       background-size: 600% 100%;
-      animation: flowPulse 6s ease-in-out infinite;
-      border-radius: 6px;
-      opacity: 0.6;
-      pointer-events: none;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      animation: pulseGradient 4s ease-in-out infinite;
     }
 
-    @keyframes flowPulse {
+    @keyframes pulseGradient {
       0%, 100% {
         background-position: 0% 50%;
         filter: brightness(1);
       }
       50% {
         background-position: 100% 50%;
-        filter: brightness(1.15);
+        filter: brightness(1.5);
       }
     }
 
