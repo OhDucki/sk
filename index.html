@@ -150,7 +150,7 @@
  color: #fff;
  font-weight: 400;
  font-size: 14px;
- margin-top: 8px;
+ margin-top: 5px;
  }
 
  .controls {
@@ -388,24 +388,28 @@
  <div class="music-player">
     <div class="controls">
       <div class="track-info">
-        <span id="track-title">Switchlanes</span><br>
+        <span id="track-title">Switchlanes By - LUCKI</span><br>
         <span id="track-artist" class="artist-name">LUCKI</span>
-        </div>
-        <button id="playPauseBtn">
-        <img id="playPauseIcon" src="assets/play.png" alt="Play" />
-        </button>
-        </div>
-        <input type="range" id="seekBar" value="0" min="0" step="1">
-        <audio id="audio" src="assets/lucki.mp3"></audio>
       </div>
-    <div class="social-logos">
-  <a href="https://instagram.com/zccmu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-    <img src="assets/iglogo.png" alt="Instagram" class="social-icon" />
-  </a>
-  <a href="https://last.fm/user/crsttt" target="_blank" rel="noopener noreferrer" aria-label="Last.fm">
-    <img src="assets/lastfmlogo.png" alt="Last.fm" class="social-icon" />
-  </a>
-</div>
+      <button id="playPauseBtn">
+        <img id="playPauseIcon" src="assets/play.png" alt="Play" />
+      </button>
+    </div>
+    <input type="range" id="seekBar" value="0" min="0" step="1">
+    <div style="display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px;">
+      <span id="currentTime">0:00</span>
+      <span id="totalDuration">0:00</span>
+    </div>
+    <audio id="audio" src="assets/lucki.mp3"></audio>
+  </div>
+  <div class="social-logos">
+    <a href="https://instagram.com/zccmu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <img src="assets/iglogo.png" alt="Instagram" class="social-icon" />
+    </a>
+    <a href="https://last.fm/user/crsttt" target="_blank" rel="noopener noreferrer" aria-label="Last.fm">
+      <img src="assets/lastfmlogo.png" alt="Last.fm" class="social-icon" />
+    </a>
+  </div>
 </div>
   </div>
   
@@ -439,9 +443,11 @@ const playPauseIcon = document.getElementById('playPauseIcon');
 const trackTitle = document.getElementById('track-title');
 const trackArtist = document.getElementById('track-artist');
 const seekBar = document.getElementById('seekBar');
+const currentTimeEl = document.getElementById('currentTime');
+const totalDurationEl = document.getElementById('totalDuration');
 
 const song = {
-  title: "Switchlanes",
+  title: "Switchlanes By - LUCKI",
   artist: "LUCKI",
   url: "assets/lucki.mp3"
 };
@@ -474,11 +480,21 @@ playPauseBtn.addEventListener('click', () => {
   }, 200);
 });
 
-// Update seek bar as song plays
+// Update seek bar and times as song plays
 audio.addEventListener('timeupdate', () => {
   if (!isNaN(audio.duration)) {
     seekBar.max = audio.duration;
     seekBar.value = audio.currentTime;
+
+    // Format current time
+    const curMinutes = Math.floor(audio.currentTime / 60);
+    const curSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+    currentTimeEl.textContent = `${curMinutes}:${curSeconds}`;
+
+    // Format total duration
+    const durMinutes = Math.floor(audio.duration / 60);
+    const durSeconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
+    totalDurationEl.textContent = `${durMinutes}:${durSeconds}`;
 
     const fillPercent = (audio.currentTime / audio.duration) * 100;
     seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
