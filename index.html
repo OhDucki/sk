@@ -149,14 +149,40 @@
    vertical-align: middle;
  }
 
- .badge.quest {
-   background-image: url('assets/quest.png');
-   margin-left: 5px;
+ /* Tooltip badges */
+ .badge-container img {
+   width: 15px;
+   height: 15px;
+   border-radius: 2px;
+   margin-right: 4px;
+   margin-left: 1px;
+   object-fit: cover;
+   position: relative;
+   cursor: default;
+   transition: transform 0.2s ease;
  }
 
- .badge.bravery {
-   background-image: url('assets/bravery.png');
-   margin-left: 1px;
+ .badge-container img::after {
+   content: attr(data-tooltip);
+   position: absolute;
+   bottom: 130%;
+   left: 50%;
+   transform: translateX(-50%) scale(0.8);
+   background: rgba(0, 0, 0, 0.85);
+   color: #fff;
+   padding: 4px 8px;
+   border-radius: 6px;
+   white-space: nowrap;
+   font-size: 12px;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.25s ease, transform 0.25s ease;
+   z-index: 10;
+ }
+
+ .badge-container img:hover::after {
+   opacity: 1;
+   transform: translateX(-50%) scale(1);
  }
 
  .music-player {
@@ -284,32 +310,6 @@
    margin-right: 4px;
    margin-left: 1px;
    object-fit: cover;
-   position: relative;
-   cursor: default;
- }
-
- /* Tooltip styling */
- .badge-container img::after {
-   content: '';
-   position: absolute;
-   bottom: 130%;
-   left: 50%;
-   transform: translateX(-50%);
-   background: rgba(0, 0, 0, 0.8);
-   color: white;
-   padding: 3px 7px;
-   border-radius: 5px;
-   white-space: nowrap;
-   font-size: 12px;
-   pointer-events: none;
-   opacity: 0;
-   transition: opacity 0.2s ease;
-   z-index: 10;
- }
-
- .badge-container img:hover::after {
-   content: attr(data-tooltip);
-   opacity: 1;
  }
 
  .social-logos {
