@@ -67,15 +67,10 @@
    100% { background-position: 100% 50%; }
  }
 
- @keyframes brightnessFade {
-   0%, 100% { filter: brightness(1); }
-   50% { filter: brightness(0.6); }
- }
-
  .card {
    width: 550px;
    min-height: 250px;
-   background-color: #111;
+   background: #111;
    border-radius: 20px;
    padding: 25px;
    box-sizing: border-box;
@@ -85,8 +80,6 @@
    transition: transform 0.1s ease, box-shadow 0.2s ease;
    transform-style: preserve-3d;
    will-change: transform;
-   position: relative;
-   animation: brightnessFade 3s ease-in-out infinite alternate;
  }
 
  .profile-pic {
@@ -268,7 +261,6 @@
    border: 2px solid transparent;
    background-clip: padding-box;
    position: relative;
-   z-index: 0;
  }
 
  .badge-container::before {
@@ -283,20 +275,6 @@
    background: linear-gradient(135deg, #3a8dde, #65c7f7, #0052d4);
    background-size: 200% 200%;
    animation: borderScroll 3s ease-in-out infinite alternate;
- }
-
- .badge-container::after {
-   content: '';
-   position: absolute;
-   top: -2px;
-   left: -2px;
-   right: -2px;
-   bottom: -2px;
-   border-radius: 18px;
-   pointer-events: none;
-   background: inherit;
-   animation: brightnessFade 3s ease-in-out infinite alternate;
-   z-index: 0;
  }
 
  .badge-container img {
