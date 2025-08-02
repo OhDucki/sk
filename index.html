@@ -147,11 +147,19 @@
  }
 
  .artist-name {
- font-weight: 400;
- color: rgba(255, 255, 255, 0.50);
- font-size: 14px;
- margin-top: 8px;
- }
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 5px;
+  
+  /* Purple gradient text */
+  background: linear-gradient(90deg, #8e2de2, #4a00e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* For Firefox */
+  background-clip: text;
+  color: transparent;
+}
 
  .controls {
  display: flex;
