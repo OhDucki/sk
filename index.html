@@ -234,17 +234,14 @@ badge.bravery {
  position: relative;
 }
 
-.badge-container::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  z-index: -1;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #ffbc8b, #ffd3a5, #fff6e0, #ffcba4, #ffbc8b);
+.badge-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #3a8dde, #4da0ff, #89c3ff, #b3daff, #d6ecff);
   background-size: 200% 200%;
+  padding: 6px 10px;
+  border-radius: 16px;
   animation: borderScroll 3s ease-in-out infinite alternate;
 }
 
