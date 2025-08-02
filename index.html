@@ -46,12 +46,22 @@
    pointer-events: none;
  }
 
+ @keyframes borderScroll {
+   0% { background-position: 0% 50%; }
+   100% { background-position: 100% 50%; }
+ }
+
+ @keyframes brightnessFade {
+   0%, 100% { filter: brightness(1); }
+   50% { filter: brightness(0); }
+ }
+
  .card-wrapper {
    padding: 4px;
    border-radius: 24px;
    background: linear-gradient(135deg, #3a8dde, #65c7f7, #0052d4);
    background-size: 200% 200%;
-   animation: borderScroll 3s ease-in-out infinite alternate, fadeToBlack 3s ease-in-out infinite alternate;
+   animation: borderScroll 3s ease-in-out infinite alternate;
    display: inline-block;
    box-shadow:
      0 0 14px rgba(58, 141, 222, 0.3),
@@ -60,16 +70,20 @@
    transition: transform 0.2s ease;
    transform-style: preserve-3d;
    will-change: transform;
+   position: relative;
  }
 
- @keyframes borderScroll {
-   0% { background-position: 0% 50%; }
-   100% { background-position: 100% 50%; }
- }
-
- @keyframes fadeToBlack {
-   0%, 100% { filter: brightness(1); }
-   50% { filter: brightness(0); }
+ /* Overlay for brightness fade on card-wrapper gradient only */
+ .card-wrapper::after {
+   content: '';
+   position: absolute;
+   top: 0; left: 0; right: 0; bottom: 0;
+   border-radius: 24px;
+   pointer-events: none;
+   background: inherit;
+   filter: brightness(1);
+   animation: brightnessFade 3s ease-in-out infinite alternate;
+   z-index: 1;
  }
 
  .card {
@@ -106,7 +120,7 @@
  .prod-gradient {
    background: linear-gradient(135deg, #3a8dde, #65c7f7, #0052d4);
    background-size: 200% 200%;
-   animation: borderScroll 3s ease-in-out infinite alternate, fadeToBlack 3s ease-in-out infinite alternate;
+   animation: borderScroll 3s ease-in-out infinite alternate, brightnessFade 3s ease-in-out infinite alternate;
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent;
    text-shadow: 0 0 8px rgba(101, 199, 247, 0.6);
@@ -281,7 +295,23 @@
    border-radius: 18px;
    background: linear-gradient(135deg, #3a8dde, #65c7f7, #0052d4);
    background-size: 200% 200%;
-   animation: borderScroll 3s ease-in-out infinite alternate, fadeToBlack 3s ease-in-out infinite alternate;
+   animation: borderScroll 3s ease-in-out infinite alternate;
+ }
+
+ /* Overlay for brightness fade on badge-container gradient only */
+ .badge-container::after {
+   content: '';
+   position: absolute;
+   top: -2px;
+   left: -2px;
+   right: -2px;
+   bottom: -2px;
+   border-radius: 18px;
+   pointer-events: none;
+   background: inherit;
+   filter: brightness(1);
+   animation: brightnessFade 3s ease-in-out infinite alternate;
+   z-index: 0;
  }
 
  .badge-container img {
