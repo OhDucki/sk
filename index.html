@@ -1,448 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1" />
- <title>crd | Producer</title>
- <link rel="icon" type="image/png" href="assets/favicon.png" />
- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css2?family=Array&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>crd | Producer</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Array&display=swap" rel="stylesheet" />
 
- <style>
- body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #111;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
- }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #111;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
- .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 0.4s ease;
- }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.4s ease;
+    }
 
- .overlay.hide {
-  opacity: 0;
-  pointer-events: none;
- }
+    .overlay.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
 
- .click-text {
-  font-size: 28px;
-  font-family: 'Array', sans-serif;
-  color: white;
-  text-transform: lowercase;
-  user-select: none;
- }
+    .click-text {
+      font-size: 28px;
+      font-family: 'Array', sans-serif;
+      color: white;
+      text-transform: lowercase;
+      user-select: none;
+    }
 
- .card-wrapper {
-  padding: 4px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, #a66bff, #d36fff);
-  background-size: 200% 200%;
-  animation: borderScroll 3s ease-in-out infinite alternate;
-  display: inline-block;
-  box-shadow:
-    0 0 18px rgba(166, 107, 255, 0.4),
-    0 0 25px rgba(211, 111, 255, 0.3),
-    0 4px 14px rgba(173, 119, 255, 0.2);
-  transition: transform 0.2s ease;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
+    .card-wrapper {
+      padding: 4px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #a66bff, #d36fff);
+      background-size: 200% 200%;
+      animation: borderScroll 3s ease-in-out infinite alternate;
+      display: inline-block;
+      box-shadow:
+        0 0 18px rgba(166, 107, 255, 0.4),
+        0 0 25px rgba(211, 111, 255, 0.3),
+        0 4px 14px rgba(173, 119, 255, 0.2);
+      transition: transform 0.2s ease;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
 
-@keyframes borderScroll {
- 0% { background-position: 0% 50%; }
- 100% { background-position: 100% 50%; }
-}
+    @keyframes borderScroll {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
 
-.card {
- width: 550px;
- min-height: 250px;
- background: #111;
- border-radius: 20px;
- padding: 25px;
- box-sizing: border-box;
- display: flex;
- flex-direction: column;
- align-items: flex-start;
- transition: transform 0.1s ease, box-shadow 0.2s ease;
- transform-style: preserve-3d;
- will-change: transform;
-}
+    .card {
+      width: 650px;
+      min-height: 250px;
+      background: #111;
+      border-radius: 20px;
+      padding: 25px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.1s ease, box-shadow 0.2s ease;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
 
-.profile-pic {
- width: 120px;
- height: 120px;
- border-radius: 50%;
- object-fit: cover;
- margin-bottom: 5px;
- border: 4px solid rgba(255, 255, 255, 0.05);
-}
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 5px;
+      border: 4px solid rgba(255, 255, 255, 0.05);
+    }
 
-.name {
- font-size: 35px;
- font-weight: 600;
- margin-left: 5px;
- color: #fff;
-}
+    .name {
+      font-size: 35px;
+      font-weight: 600;
+      margin-left: 5px;
+      color: #fff;
+    }
 
-.prod-gradient {
- background: linear-gradient(135deg, #a66bff, #d36fff);
- -webkit-background-clip: text;
- -webkit-text-fill-color: transparent;
- text-shadow: 0 0 4px rgba(173, 119, 255, 0.4);
-}
+    .prod-gradient {
+      background: linear-gradient(135deg, #a66bff, #d36fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 4px rgba(173, 119, 255, 0.4);
+    }
 
-.description {
- font-size: 16px;
- color: #ddd;
- line-height: 1.4;
- max-width: 100%;
- margin-left: 5px;
-}
+    .description {
+      font-size: 16px;
+      color: #ddd;
+      line-height: 1.4;
+      max-width: 100%;
+      margin-left: 5px;
+    }
 
-.presence-card {
- display: flex;
- align-items: center;
- background: rgba(255, 255, 255, 0.05);
- border-radius: 12px;
- padding: 10px 14px;
- width: 100%;
- backdrop-filter: blur(5px);
- margin-top: 25px;
-}
+    .presence-card {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 10px 14px;
+      width: 100%;
+      backdrop-filter: blur(5px);
+      margin-top: 25px;
+    }
 
-.avatar {
- width: 60px;
- height: 60px;
- border-radius: 50%;
- object-fit: cover;
- margin-right: 12px;
-}
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 12px;
+    }
 
-.details .username {
- font-size: 15px;
- font-weight: 500;
- color: #fff;
-}
+    .details .username {
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+    }
 
-.badge {
- display: inline-block;
- width: 16px;
- height: 16px;
- background-size: cover;
- background-position: center;
- vertical-align: middle;
-}
+    .badge {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-size: cover;
+      background-position: center;
+      vertical-align: middle;
+    }
 
-.badge.quest {
- background-image: url('assets/quest.png');
- margin-left: 5px;
-}
+    .badge.quest {
+      background-image: url('assets/quest.png');
+      margin-left: 5px;
+    }
 
-.badge.bravery {
- background-image: url('assets/bravery.png');
- margin-left: 1px;
-}
+    .badge.bravery {
+      background-image: url('assets/bravery.png');
+      margin-left: 1px;
+    }
 
-.music-player {
- margin-top: 10px;
- width: 100%;
- background: rgba(30, 30, 30, 0.7);
- border-radius: 12px;
- padding: 12px 14px;
- backdrop-filter: blur(5px);
- display: flex;
- flex-direction: column;
- gap: 10px;
-}
+    .music-player {
+      margin-top: 10px;
+      width: 100%;
+      background: rgba(30, 30, 30, 0.7);
+      border-radius: 12px;
+      padding: 12px 14px;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-.track-info {
- color: rgba(255, 255, 255, 0.9);
- font-size: 14px;
- font-weight: 400;
- display: flex;
- flex-direction: column;
- line-height: 0.5;
-}
+    .track-info {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      font-weight: 400;
+      display: flex;
+      flex-direction: column;
+      line-height: 0.5;
+    }
 
-.artist-name {
- font-weight: 400;
- color: rgba(255, 255, 255, 0.5);
- font-size: 14px;
- margin-top: 8px;
-}
+    .artist-name {
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      margin-top: 8px;
+    }
 
-.controls {
- display: flex;
- justify-content: space-between;
- align-items: center;
-}
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.controls button {
- background: transparent;
- border: none;
- cursor: pointer;
- display: flex;
- align-items: center;
- justify-content: center;
- padding: 0;
- transition: transform 0.2s ease;
-}
+    .controls button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: transform 0.2s ease;
+    }
 
-.controls button:hover {
- transform: scale(1.1);
-}
+    .controls button:hover {
+      transform: scale(1.1);
+    }
 
-.controls img {
- width: 26px;
- height: 26px;
- transition: opacity 0.25s ease;
-}
+    .controls img {
+      width: 26px;
+      height: 26px;
+      transition: opacity 0.25s ease;
+    }
 
-#seekBar {
- -webkit-appearance: none;
- width: 100%;
- height: 4px;
- background: rgba(255, 255, 255, 0.165);
- border-radius: 10px;
- position: relative;
- cursor: pointer;
- overflow: hidden;
- transition: height 0.2s ease;
-}
+    #seekBar {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.165);
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: height 0.2s ease;
+    }
 
-#seekBar::-webkit-slider-thumb {
- -webkit-appearance: none;
- appearance: none;
- background: transparent;
- border: none;
-}
+    #seekBar::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      border: none;
+    }
 
-#seekBar::before {
- content: '';
- position: absolute;
- height: 100%;
- background: rgba(255, 255, 255, 0.267);
- width: 0%;
- z-index: 1;
- transition: width 0.1s linear;
-}
+    #seekBar::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.267);
+      width: 0%;
+      z-index: 1;
+      transition: width 0.1s linear;
+    }
 
-#seekBar:hover,
-#seekBar:active {
- height: 8px;
-}
+    #seekBar:hover,
+    #seekBar:active {
+      height: 8px;
+    }
 
-.badge-container {
- display: flex;
- align-items: center;
- margin-left: 10px;
- padding: 5px;
- border-radius: 16px;
- background: #111;
- border: 2px solid transparent;
- background-clip: padding-box;
- position: relative;
-}
+    .badge-container {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      padding: 5px;
+      border-radius: 16px;
+      background: #111;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
 
-.badge-container::before {
- content: '';
- position: absolute;
- top: -2px;
- left: -2px;
- right: -2px;
- bottom: -2px;
- z-index: -1;
- border-radius: 18px;
- background: linear-gradient(135deg, #a66bff, #d36fff);
- background-size: 200% 200%;
- animation: borderScroll 3s ease-in-out infinite alternate;
-}
+    .badge-container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      z-index: -1;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #a66bff, #d36fff);
+      background-size: 200% 200%;
+      animation: borderScroll 3s ease-in-out infinite alternate;
+    }
 
-.badge-container img {
- width: 15px;
- height: 15px;
- border-radius: 2px;
- margin-right: 4px;
- margin-left: 1px;
- object-fit: cover;
-}
+    .badge-container img {
+      width: 15px;
+      height: 15px;
+      border-radius: 2px;
+      margin-right: 4px;
+      margin-left: 1px;
+      object-fit: cover;
+    }
 
-.social-logos {
- display: flex;
- justify-content: flex-start;
- align-items: center;
- gap: 15px;
- margin-top: 25px;
- margin-left: 5px;
- opacity: 0.2;
-}
+    .social-logos {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 15px;
+      margin-top: 25px;
+      margin-left: 5px;
+      opacity: 0.2;
+    }
 
-.social-icon {
- width: 35px;
- height: 35px;
- object-fit: contain;
-}
+    .social-icon {
+      width: 35px;
+      height: 35px;
+      object-fit: contain;
+    }
 
-.social-logos a {
- transition: transform 0.3s ease;
-}
+    .social-logos a {
+      transition: transform 0.3s ease;
+    }
 
-.social-logos a:hover {
- transform: scale(1.15);
-}
- </style>
+    .social-logos a:hover {
+      transform: scale(1.15);
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="overlay" id="overlay">
- <div class="click-text">click</div>
+  <div class="click-text">click</div>
 </div>
 
 <div class="card-wrapper" id="cardWrapper">
- <div class="card" id="card">
-  <img src="assets/pfp.png" alt="pfp" class="profile-pic" />
-  <div style="display: flex; align-items: center;">
-    <div class="name" id="profileName">
-      <span class="prod-gradient">prod</span> @skoozuh
-    </div>
-    <div class="badge-container">
-      <img src="assets/crownw.png" alt="owner">
-      <img src="assets/trophy.png" alt="owner">
-    </div>
-  </div>
-
-  <div class="description">
-    Owner <br> @skoozuh
-  </div>
-
-  <div class="presence-card">
-    <img class="avatar" src="https://media.discordapp.net/attachments/1401010039681978381/1401023191757099170/pfp.png" alt="Avatar">
-    <div class="details">
-      <div class="username">
-        skoozuh
-        <span class="badge quest"></span>
-        <span class="badge bravery"></span>
+  <div class="card" id="card">
+    <img src="assets/pfp.png" alt="pfp" class="profile-pic" />
+    <div style="display: flex; align-items: center;">
+      <div class="name">
+        <span class="prod-gradient">prod</span> @skoozuh
+      </div>
+      <div class="badge-container">
+        <img src="assets/crownw.png" alt="owner">
+        <img src="assets/trophy.png" alt="owner">
       </div>
     </div>
-  </div>
 
-  <div class="music-player">
-    <div class="controls">
-      <div class="track-info">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span id="track-title">Switchlanes By - LUCKI</span>
-          <span id="track-duration" style="font-size: 13px; color: rgba(255, 255, 255, 0.5);">0:00</span>
+    <div class="description">Owner <br> @skoozuh</div>
+
+    <div class="presence-card">
+      <img class="avatar" src="https://media.discordapp.net/attachments/1401010039681978381/1401023191757099170/pfp.png?ex=688ec406&is=688d7286&hm=f481589859fb09df918d82265f354b78dd08bedf1fa7e27f78a4c6ca467dcde2&format=webp&quality=lossless&width=1408&height=1408" alt="Avatar">
+      <div class="details">
+        <div class="username">
+          skoozuh
+          <span class="badge quest"></span>
+          <span class="badge bravery"></span>
         </div>
-        <span id="track-artist" class="artist-name">LUCKI</span>
       </div>
-      <button id="playPauseBtn">
-        <img id="playPauseIcon" src="assets/play.png" alt="Play" />
-      </button>
     </div>
-    <input type="range" id="seekBar" value="0" min="0" step="1">
-    <audio id="audio" src="assets/lucki.mp3"></audio>
-  </div>
 
-  <div class="social-logos">
-    <a href="https://instagram.com/zccmu" target="_blank">
-      <img src="assets/iglogo.png" alt="Instagram" class="social-icon" />
-    </a>
-    <a href="https://last.fm/user/crsttt" target="_blank">
-      <img src="assets/lastfmlogo.png" alt="Last.fm" class="social-icon" />
-    </a>
+    <div class="music-player">
+      <div class="controls">
+        <div class="track-info">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span id="track-title">Switchlanes By - LUCKI</span>
+            <span id="track-duration" style="font-size: 13px; color: rgba(255, 255, 255, 0.5);">0:00</span>
+          </div>
+          <span id="track-artist" class="artist-name">LUCKI</span>
+        </div>
+        <button id="playPauseBtn">
+          <img id="playPauseIcon" src="assets/play.png" alt="Play" />
+        </button>
+      </div>
+      <input type="range" id="seekBar" value="0" min="0" step="1">
+      <audio id="audio" src="assets/lucki.mp3"></audio>
+    </div>
+
+    <div class="social-logos">
+      <a href="https://instagram.com/zccmu" target="_blank">
+        <img src="assets/iglogo.png" alt="Instagram" class="social-icon" />
+      </a>
+      <a href="https://last.fm/user/crsttt" target="_blank">
+        <img src="assets/lastfmlogo.png" alt="Last.fm" class="social-icon" />
+      </a>
+    </div>
   </div>
- </div>
 </div>
 
 <script>
-document.getElementById('overlay').addEventListener('click', () => {
- document.getElementById('overlay').classList.add('hide');
- document.body.style.overflow = 'auto';
-});
+  document.getElementById('overlay').addEventListener('click', () => {
+    document.getElementById('overlay').classList.add('hide');
+    document.body.style.overflow = 'auto';
+  });
 
-const wrapper = document.getElementById('cardWrapper');
+  const wrapper = document.getElementById('cardWrapper');
+  wrapper.addEventListener('mousemove', (e) => {
+    const rect = wrapper.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * 8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+    wrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+  wrapper.addEventListener('mouseleave', () => {
+    wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  });
 
-wrapper.addEventListener('mousemove', (e) => {
- const rect = wrapper.getBoundingClientRect();
- const x = e.clientX - rect.left;
- const y = e.clientY - rect.top;
+  const audio = document.getElementById('audio');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const playPauseIcon = document.getElementById('playPauseIcon');
+  const seekBar = document.getElementById('seekBar');
+  const trackDuration = document.getElementById('track-duration');
 
- const centerX = rect.width / 2;
- const centerY = rect.height / 2;
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  }
 
- const rotateX = ((y - centerY) / centerY) * 8;
- const rotateY = ((x - centerX) / centerX) * 8;
+  playPauseBtn.addEventListener('click', () => {
+    playPauseIcon.style.opacity = 0;
+    setTimeout(() => {
+      if (audio.paused) {
+        audio.play();
+        playPauseIcon.src = "assets/pause.png";
+      } else {
+        audio.pause();
+        playPauseIcon.src = "assets/play.png";
+      }
+      playPauseIcon.style.opacity = 1;
+    }, 200);
+  });
 
- wrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-});
+  audio.addEventListener('loadedmetadata', () => {
+    trackDuration.textContent = formatTime(audio.duration);
+  });
 
-wrapper.addEventListener('mouseleave', () => {
- wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
-});
+  audio.addEventListener('timeupdate', () => {
+    if (!isNaN(audio.duration)) {
+      seekBar.max = audio.duration;
+      seekBar.value = audio.currentTime;
+      const fillPercent = (audio.currentTime / audio.duration) * 100;
+      seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
+      trackDuration.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    }
+  });
 
-function formatTime(seconds) {
- const mins = Math.floor(seconds / 60);
- const secs = Math.floor(seconds % 60);
- return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-}
-
-const audio = document.getElementById('audio');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const playPauseIcon = document.getElementById('playPauseIcon');
-const seekBar = document.getElementById('seekBar');
-const trackDuration = document.getElementById('track-duration');
-
-playPauseBtn.addEventListener('click', () => {
- playPauseIcon.style.opacity = 0;
- setTimeout(() => {
-   if (audio.paused) {
-     audio.play();
-     playPauseIcon.src = "assets/pause.png";
-   } else {
-     audio.pause();
-     playPauseIcon.src = "assets/play.png";
-   }
-   playPauseIcon.style.opacity = 1;
- }, 200);
-});
-
-audio.addEventListener('loadedmetadata', () => {
- trackDuration.textContent = formatTime(audio.duration);
-});
-
-audio.addEventListener('timeupdate', () => {
- if (!isNaN(audio.duration)) {
-   seekBar.max = audio.duration;
-   seekBar.value = audio.currentTime;
-
-   const fillPercent = (audio.currentTime / audio.duration) * 100;
-   seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
-
-   trackDuration.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
- }
-});
-
-seekBar.addEventListener('input', () => {
- audio.currentTime = seekBar.value;
-});
+  seekBar.addEventListener('input', () => {
+    audio.currentTime = seekBar.value;
+  });
 </script>
 
 </body>
